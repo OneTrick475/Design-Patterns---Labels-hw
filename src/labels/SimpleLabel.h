@@ -7,5 +7,7 @@ class SimpleLabel : public Label {
 public:
 	SimpleLabel(const std::string& value);
 
+	Label* clone() const override;
+
 	std::string getText() const override ;
 };

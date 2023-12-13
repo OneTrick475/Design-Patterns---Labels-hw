@@ -4,13 +4,19 @@
 #include "TransformText.h"
 
 class LabelDecorator : public Label {
-	std::unique_ptr<Label> label;
-	std::unique_ptr<TransformText> transform;
+	std::shared_ptr<Label> label;
+	std::shared_ptr<TransformText> transform;
 
 public:
-	LabelDecorator(std::unique_ptr<Label>&& label, std::unique_ptr<TransformText> transform);
+	LabelDecorator(std::shared_ptr<Label>&& label, std::shared_ptr<TransformText>&& transform);
 
 	std::string getText() const override;
+
+	virtual Label* clone() const;
+
+	std::shared_ptr<Label> removeDecorator(const std::shared_ptr<TransformText>& transform);
+
+	static std::shared_ptr<Label> removeDecorator(std::shared_ptr<LabelDecorator>& label, const std::shared_ptr<TransformText>& transform);
 
 	virtual ~LabelDecorator() = default;
 };

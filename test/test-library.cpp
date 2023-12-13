@@ -2,32 +2,24 @@
 #include "library.h"
 
 #include <chrono>
+#include <labels/SimpleLabel.h>
+#include <labels/LabelDecorator.h>
+#include <labels/CapitalizeText.h>
 
-TEST_CASE("fibonacci(N) throws when N < 0")
+
+
+TEST_CASE("Test capitalize")
 {
-	REQUIRE_THROWS_AS(fibonacci(-1), std::invalid_argument);
+	LabelDecorator dec(std::make_shared<SimpleLabel>(SimpleLabel("idk")), std::make_shared<CapitalizeText>(CapitalizeText()));
+
+	REQUIRE(dec.getText() == "IDK");
 }
 
-TEST_CASE("fibonacci(N) returns correct values")
+TEST_CASE("Test remove capitalize")
 {
-	const int size = 10;
-	int expected[] = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34};
+	auto dec = std::make_shared<LabelDecorator>(LabelDecorator(std::make_shared<SimpleLabel>(SimpleLabel("idk")), std::make_shared<CapitalizeText>(CapitalizeText())));
 
-	for(int i = 0; i < size; ++i)
-		REQUIRE(fibonacci(i) == expected[i]);
+	auto rem = LabelDecorator::removeDecorator(dec, std::make_shared<CapitalizeText>(CapitalizeText()));
+
+	REQUIRE(rem->getText() == "idk");
 }
-
-TEST_CASE("fibonacci(N) works for numbers up to 10'000")
-{
-	REQUIRE_NOTHROW(fibonacci(10'000)); // must not fail
-}
-
-TEST_CASE("fibonacci(N) finishes under 2s in the worst case")
-{
-	auto start = std::chrono::steady_clock::now();
-	fibonacci(10'000);
-	auto end = std::chrono::steady_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-	REQUIRE(duration <= 2);
-}
-

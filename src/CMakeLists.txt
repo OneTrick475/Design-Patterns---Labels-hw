@@ -8,7 +8,7 @@ target_sources(
     PRIVATE
         "library.cpp"
         "library.h"
- "labels/Label.h" "labels/SimpleLabel.h" "labels/SimpleLabel.cpp" "labels/RichLabel.h" "labels/RichLabel.cpp" "labels/TransformText.h" "labels/LabelDecorator.h" "labels/LabelDecorator.cpp" "labels/RandomLabelDecorator.h" "labels/RandomLabelDecorator.cpp")
+ "labels/Label.h" "labels/SimpleLabel.h" "labels/SimpleLabel.cpp" "labels/RichLabel.h" "labels/RichLabel.cpp" "labels/TransformText.h" "labels/LabelDecorator.h" "labels/LabelDecorator.cpp" "labels/RandomLabelDecorator.h" "labels/RandomLabelDecorator.cpp" "labels/CapitalizeText.h" "labels/CapitalizeText.cpp")
 
 
 # Executable target for the application
@@ -26,4 +26,4 @@ target_sources(
     application
     PRIVATE
         "application.cpp"
- "labels/Label.h" "labels/SimpleLabel.h" "labels/SimpleLabel.cpp" "labels/RichLabel.h" "labels/RichLabel.cpp" "labels/TransformText.h" "labels/LabelDecorator.h" "labels/LabelDecorator.cpp" "labels/RandomLabelDecorator.h" "labels/RandomLabelDecorator.cpp")
+ "labels/Label.h" "labels/SimpleLabel.h" "labels/SimpleLabel.cpp" "labels/RichLabel.h" "labels/RichLabel.cpp" "labels/TransformText.h" "labels/LabelDecorator.h" "labels/LabelDecorator.cpp" "labels/RandomLabelDecorator.h" "labels/RandomLabelDecorator.cpp" "labels/CapitalizeText.h" "labels/CapitalizeText.cpp")
