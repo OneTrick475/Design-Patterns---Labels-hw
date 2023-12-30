@@ -7,6 +7,7 @@
 #include <labels/CapitalizeText.h>
 #include <labels/Replace.h>
 #include <labels/CompositeDecorator.h>
+#include <labels/CompositeTransform.h>
 
 
 TEST_CASE("Test capitalize")
@@ -85,4 +86,17 @@ TEST_CASE("Test stack composite with other")
 	dec = std::make_shared<LabelDecorator>(dec, std::make_shared<CapitalizeText>(CapitalizeText()));
 
 	REQUIRE(dec->getText() == "IDK_IDK");
+}
+
+
+TEST_CASE("Test composite transform")
+{
+	std::vector<std::shared_ptr<TransformText>> transforms;
+	transforms.push_back(std::make_shared<Replace>(Replace("abc", "def")));
+	transforms.push_back(std::make_shared<CapitalizeText>(CapitalizeText()));
+	std::shared_ptr<TransformText> transform = std::make_shared<CompositeTransform>(transforms);
+
+	std::shared_ptr<Label> dec = std::make_shared<LabelDecorator>(std::make_shared<SimpleLabel>(SimpleLabel("abc_def")), transform);
+
+	REQUIRE(dec->getText() == "DEF_DEF");
 }
