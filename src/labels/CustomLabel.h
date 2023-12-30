@@ -1,16 +1,17 @@
 #pragma once 
 
 #include "Label.h"
+#include <iostream>
 
 class CustomLabel : public Label {
-	std::string text;
-	int timeout = 0;
+	mutable std::string text;
+	mutable int timeout = 0;
 	int time = 0;
 
 	std::istream& is;
 
 public:
-	CustomLabel(const std::string& text, int time = 0, std::istream& is);
+	CustomLabel(int time = 0, std::istream& is = std::cin);
 
 	virtual std::string getText() const override;
 

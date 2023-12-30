@@ -8,6 +8,7 @@
 #include <labels/Replace.h>
 #include <labels/CompositeDecorator.h>
 #include <labels/CompositeTransform.h>
+#include <labels/CustomLabel.h>
 
 
 TEST_CASE("Test capitalize")
@@ -99,4 +100,15 @@ TEST_CASE("Test composite transform")
 	std::shared_ptr<Label> dec = std::make_shared<LabelDecorator>(std::make_shared<SimpleLabel>(SimpleLabel("abc_def")), transform);
 
 	REQUIRE(dec->getText() == "DEF_DEF");
+}
+
+TEST_CASE("custom label") 
+{
+	std::stringstream ss("123 321");
+
+	CustomLabel label(2, ss);
+
+	REQUIRE("123" == label.getText());
+	REQUIRE("123" == label.getText());
+	REQUIRE("321" == label.getText());
 }
